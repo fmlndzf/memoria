@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Juego de Memoria</title>
+
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#ffffff">
+    
+    <link rel="stylesheet" href="./css/fontawesome.css">
+    <link rel="stylesheet" href="./css/solid.css">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <header class="header">
+
+        <div class="header__contenido">
+
+           
+
+            <div class="header__controles">
+
+                
+                
+                <div class="temporizador">
+                    <i class="fa-solid fa-clock"></i>
+                    <span id="temporizador">00:00</span>
+                </div>
+
+                <button id="nuevoJuego" class="boton">
+                    <i class="fa-solid fa-shuffle"></i>
+                    Nuevo
+                </button>
+
+                <button id="jugarDeNuevo" class="boton">
+                    <i class="fa-solid fa-rotate-right"></i>
+                    Reiniciar
+                </button>
+
+                <button id="niveles" class="boton">
+                    <i class="fa-solid fa-layer-group"></i>
+                    Nivel
+                </button>
+
+            </div>
+
+        </div>
+
+    </header>
+
+    <div id="menuNiveles" class="menu-niveles">
+
+        <div class="menu-niveles__contenido">
+    
+            <h2>Seleccionar nivel</h2>
+    
+            <div class="niveles-grid">
+    
+                <button class="nivel" data-filas="3">
+                    3 × 3
+                </button>
+    
+                <button class="nivel nivel--activo" data-filas="4">
+                    4 × 4
+                </button>
+    
+                <button class="nivel" data-filas="5">
+                    5 × 5
+                </button>
+    
+                <button class="nivel" data-filas="6">
+                    6 × 6
+                </button>
+    
+            </div>
+    
+            <button id="cerrarNiveles" class="boton">
+                Cerrar
+            </button>
+    
+        </div>
+    
+    </div>
+
+
+    <main class="juego">
+
+        <div class="informacion">
+            <span>
+                Movimientos:
+                <strong id="movimientos">0</strong>
+            </span>
+        </div>
+
+        <div id="tablero" class="tablero"></div>
+
+        
+
+    </main>
+
+
+    <script src="app.js"></script>
+    <script>
+        if ("serviceWorker" in navigator) {
+    
+            window.addEventListener("load", () => {
+    
+                navigator.serviceWorker
+                    .register("./service-worker.js")
+                    .then(() => {
+                        console.log("Service Worker registrado.");
+                    })
+                    .catch(error => {
+                        console.error(
+                            "Error al registrar el Service Worker:",
+                            error
+                        );
+                    });
+    
+            });
+        }
+    </script>
+
+</body>
+
+</html>

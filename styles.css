@@ -1,0 +1,568 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
+    /* Evitar selección de texto */
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+body {
+    min-height: 100vh;
+
+    font-family: Arial, sans-serif;
+
+    color: #111111;
+
+    background: #eeeeee;
+
+    /* Evitar selección y menú contextual táctil */
+    -webkit-touch-callout: none;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.header {
+    width: 100%;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 2px 10px rgba(0, 0, 0, 0.10);
+
+    position: relative;
+    z-index: 10;
+}
+
+.header__contenido {
+    width: min(1100px, 94vw);
+
+    min-height: 80px;
+
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 25px;
+}
+
+.header__titulo {
+    font-size: 25px;
+
+    white-space: nowrap;
+
+    color: #111111;
+}
+
+.header__controles {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+
+    justify-content: flex-end;
+}
+
+
+/* =========================
+   TEMPORIZADOR
+========================= */
+
+.temporizador {
+    display: flex;
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 10px 14px;
+
+    font-size: 17px;
+    font-weight: bold;
+
+    white-space: nowrap;
+
+    color: #111111;
+}
+
+
+/* =========================
+   BOTONES
+========================= */
+
+.boton {
+    display: flex;
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 10px 14px;
+
+    border: 1px solid #111111;
+
+    border-radius: 7px;
+
+    background: #111111;
+
+    color: #ffffff;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.15s ease,
+        color 0.15s ease,
+        transform 0.15s ease;
+}
+
+.boton:hover {
+    background: #ffffff;
+
+    color: #111111;
+}
+
+.boton:active {
+    transform: translateY(1px);
+}
+
+
+/* =========================
+   CONTENIDO DEL JUEGO
+========================= */
+
+.juego {
+    width: min(90vw, 500px);
+
+    margin: 35px auto;
+
+    text-align: center;
+}
+
+.informacion {
+    margin-bottom: 18px;
+
+    font-size: 18px;
+
+    color: #333333;
+}
+
+.informacion strong {
+    color: #111111;
+}
+
+
+/* =========================
+   TABLERO
+========================= */
+
+.tablero {
+    display: grid;
+
+    gap: 4px;
+
+    width: 100%;
+}
+
+
+/* =========================
+   CARTAS
+========================= */
+
+.carta {
+    appearance: none;
+    -webkit-appearance: none;
+
+    position: relative;
+
+    width: 100%;
+    aspect-ratio: 1 / 1;
+
+    padding: 0;
+    margin: 0;
+
+    cursor: pointer;
+
+    perspective: 900px;
+
+    background: transparent;
+
+    display: block;
+
+    /* Evita gestos táctiles no deseados */
+    touch-action: manipulation;
+
+    transition:
+        transform 0.18s ease;
+}
+
+
+.carta:active {
+    transform: translateY(-1px);
+}
+
+
+/* =========================
+   INTERIOR
+========================= */
+
+.carta__interior {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    transition:
+        transform 0.45s cubic-bezier(
+            0.4,
+            0.2,
+            0.2,
+            1
+        );
+
+    transform-style: preserve-3d;
+}
+
+.carta.volteada .carta__interior {
+    transform: rotateY(180deg);
+}
+
+
+/* =========================
+   CARAS
+========================= */
+
+.carta__frente,
+.carta__dorso {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    backface-visibility: hidden;
+
+    overflow: hidden;
+
+    font-size: clamp(25px, 7vw, 45px);
+}
+
+
+/* =========================
+   FRENTE
+========================= */
+
+.carta__frente {
+    background: #ffffff;
+
+    color: #111111;
+
+    transform: rotateY(180deg);
+
+    border: 2px solid #555555;
+
+    box-shadow:none;
+}
+
+
+/* =========================
+   DORSO
+========================= */
+
+.carta__dorso {
+    background: #111111;
+
+    color: #ffffff;
+
+    border: 1px solid #000000;
+
+    box-shadow: none;
+
+    position: absolute;
+}
+
+
+/* =========================
+   CARTA ENCONTRADA
+========================= */
+
+.carta.encontrada .carta__frente {
+    background: #f5f5f5;
+
+    color: #111111;
+
+    box-shadow:
+        0 0 0 1px #ffffff,
+        0 5px 14px rgba(0, 0, 0, 0.18);
+}
+
+
+/* =========================
+   ANIMACIÓN PAREJA
+========================= */
+
+@keyframes parejaEncontrada {
+
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+
+}
+
+.carta.encontrada {
+    animation:
+        parejaEncontrada 0.35s ease;
+}
+
+
+/* =========================
+   CARTA ESPECIAL
+========================= */
+
+.carta--especial .carta__interior {
+    transform: rotateY(180deg);
+}
+
+.carta__especial {
+    background: #ffffff;
+
+    color: #111111;
+
+    font-size: clamp(25px, 7vw, 45px);
+
+    font-weight: bold;
+
+    text-align: center;
+
+    padding: 10px;
+
+    border: none;
+
+    box-shadow:
+        0 5px 14px rgba(0, 0, 0, 0.18);
+}
+
+
+/* =========================
+   MENÚ DE NIVELES
+========================= */
+
+.menu-niveles {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 100;
+
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+
+    background: rgba(0, 0, 0, 0.55);
+}
+
+.menu-niveles.visible {
+    display: flex;
+}
+
+.menu-niveles__contenido {
+    width: min(90vw, 400px);
+
+    padding: 28px;
+
+    border-radius: 14px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.30);
+
+    text-align: center;
+
+    animation:
+        aparecerMenu 0.2s ease;
+}
+
+.menu-niveles__contenido h2 {
+    margin-bottom: 20px;
+
+    color: #111111;
+
+    font-size: 22px;
+}
+
+
+/* =========================
+   ANIMACIÓN MENÚ
+========================= */
+
+@keyframes aparecerMenu {
+
+    from {
+        opacity: 0;
+
+        transform:
+            scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            scale(1);
+    }
+
+}
+
+
+/* =========================
+   BOTONES DE NIVEL
+========================= */
+
+.niveles-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 12px;
+
+    margin-bottom: 20px;
+}
+
+.nivel {
+    padding: 18px 10px;
+
+    border: 1px solid #cccccc;
+
+    border-radius: 9px;
+
+    background: #ffffff;
+
+    color: #111111;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        background 0.15s ease,
+        color 0.15s ease,
+        border-color 0.15s ease,
+        transform 0.15s ease;
+}
+
+.nivel:hover {
+    border-color: #111111;
+
+    background: #f2f2f2;
+
+    transform: translateY(-2px);
+}
+
+.nivel--activo {
+    border-color: #111111;
+
+    background: #111111;
+
+    color: #ffffff;
+}
+
+
+/* =========================
+   MÓVIL
+========================= */
+
+@media (max-width: 700px) {
+
+    .header__contenido {
+        padding: 15px 0;
+
+        flex-direction: column;
+
+        gap: 8px;
+    }
+
+    .header__titulo {
+        font-size: 23px;
+    }
+
+    .header__controles {
+        justify-content: center;
+    }
+
+    .juego {
+        margin-top: 20px;
+    }
+
+    .carta__frente,
+.carta__dorso {
+
+    font-size: clamp(40px, 7vw, 45px);
+}
+    
+    .carta__especial {
+    
+        font-size: clamp(40px, 7vw, 45px);
+
+    }
+
+}
+
+
+/* =========================
+   MÓVIL PEQUEÑO
+========================= */
+
+@media (max-width: 450px) {
+
+    .header__controles {
+        width: 100%;
+    }
+
+    .boton {
+        flex: 1;
+
+        justify-content: center;
+    }
+
+    .temporizador {
+        width: 100%;
+
+        justify-content: center;
+    }
+
+    .tablero {
+        gap: 1px;
+    }
+
+}
