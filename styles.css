@@ -203,6 +203,11 @@ body {
 
     transition:
         transform 0.18s ease;
+    
+    border: none;
+
+    container-type: inline-size;
+
 }
 
 
@@ -261,7 +266,7 @@ body {
 
     overflow: hidden;
 
-    font-size: clamp(25px, 7vw, 45px);
+    font-size: 40cqw;
 }
 
 
@@ -276,7 +281,7 @@ body {
 
     transform: rotateY(180deg);
 
-    border: 2px solid #555555;
+    border: 1px solid #555555;
 
     box-shadow:none;
 }
@@ -290,8 +295,6 @@ body {
     background: #111111;
 
     color: #ffffff;
-
-    border: 1px solid #000000;
 
     box-shadow: none;
 
@@ -353,7 +356,7 @@ body {
 
     color: #111111;
 
-    font-size: clamp(25px, 7vw, 45px);
+    font-size: 40cqw;
 
     font-weight: bold;
 
@@ -361,7 +364,7 @@ body {
 
     padding: 10px;
 
-    border: none;
+    border: 1px solid #555555;
 
     box-shadow:
         0 5px 14px rgba(0, 0, 0, 0.18);
@@ -461,7 +464,7 @@ body {
 .nivel {
     padding: 18px 10px;
 
-    border: 1px solid #cccccc;
+    border: 1px solid #818181;
 
     border-radius: 9px;
 
@@ -527,12 +530,12 @@ body {
     .carta__frente,
 .carta__dorso {
 
-    font-size: clamp(40px, 7vw, 45px);
+    font-size: 50cqw;
 }
     
     .carta__especial {
     
-        font-size: clamp(40px, 7vw, 45px);
+        font-size: 50cqw;
 
     }
 

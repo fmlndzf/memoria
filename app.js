@@ -513,7 +513,7 @@ function comprobarPareja() {
 
             informacion.innerHTML = `
                 <strong>
-                    ¡Completaste el juego en
+                    ¡Completado en
                     ${movimientos} movimientos!
                 </strong>
             `;
